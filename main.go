@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bufio"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -61,26 +60,4 @@ func contains(s []string, e string) bool {
 func Dump(s interface{}, d string) {
 	res2B, _ := json.MarshalIndent(s, ">", "  ")
 	fmt.Println(d, string(res2B))
-}
-
-func PrintToStdOut(callBack FuncErrorOut) {
-	pr, pw := io.Pipe()
-	defer pr.Close()
-	var err error
-	go func() {
-		// close the writer, so the reader knows there's no more data
-		defer pw.Close()
-
-		err = callBack(pw)
-	}()
-	scanner := bufio.NewScanner(pr)
-	for scanner.Scan() {
-		fmt.Println(scanner.Text()) // Println will add back the final '\n'
-	}
-	if err := scanner.Err(); err != nil {
-		fmt.Fprintln(os.Stderr, "reading standard input:", err)
-	}
-	if err != nil {
-		log.Fatal(err)
-	}
 }

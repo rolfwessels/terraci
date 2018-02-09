@@ -37,7 +37,16 @@ func TerraformPlan(command TerraformCommand, w io.Writer) error {
 
 	args = append(args, confArgs...)
 	stateFile := "-state=" + command.StateFile
-	args = append(args, []string{stateFile, "-no-color", "-input=false", command.Scripts}...)
+	outFile := "-out=" + command.OutputFile
+	args = append(args, []string{stateFile, outFile, "-no-color", "-input=false", command.Scripts}...)
+
+	return execCommand("terraform.exe", args, w)
+}
+
+func TerraformApply(command TerraformCommand, w io.Writer) error {
+	args := []string{"apply"}
+
+	args = append(args, []string{"-no-color", "-input=false", command.OutputFile}...)
 
 	return execCommand("terraform.exe", args, w)
 }
@@ -52,10 +61,8 @@ func execCommand(executable string, args []string, w io.Writer) error {
 		return err
 	}
 
-	if err := cmd.Wait(); err != nil {
-		return err
-	}
-	return nil
+	err := cmd.Wait()
+	return err
 }
 
 func BuildCommands(currentPackage Package, keys []string) ([]TerraformCommand, error) {
@@ -64,7 +71,7 @@ func BuildCommands(currentPackage Package, keys []string) ([]TerraformCommand, e
 	for _, sec := range sec {
 		if contains(keys, sec.Name) {
 			cmd := TerraformCommand{}
-			keys := []string{}
+			selectedConfigs := []string{"ts"}
 			for _, pacs := range sec.Packages {
 				cmd.Scripts = pacs.Path
 
@@ -86,17 +93,18 @@ func BuildCommands(currentPackage Package, keys []string) ([]TerraformCommand, e
 						err := fmt.Sprintf("When applying terraform changes to %s you need to select only one config [%s].", sec.Name, strings.Join(joinops, ", "))
 						return command, errors.New(err)
 					}
-
+					selectedConfigs = append(selectedConfigs, strings.Replace(filterdCnfs[0], ".tfvars", "", 1))
 					cnfs = filterdCnfs
 				}
 				for _, confs := range cnfs {
 					fullPath := path.Join(pacs.Path, confs)
 					cmd.Configs = append(cmd.Configs, fullPath)
-					//keys = append(keys, confs)
+
 				}
 			}
 
-			cmd.StateFile = path.Join(cmd.Scripts, "ts"+strings.Join(keys, "-")+".tfstate")
+			cmd.StateFile = path.Join(cmd.Scripts, strings.Join(selectedConfigs, "-")+".tfstate")
+			cmd.OutputFile = path.Join(cmd.Scripts, strings.Join(selectedConfigs, "-")+".tfout")
 			command = append(command, cmd)
 		}
 	}
@@ -122,9 +130,10 @@ func BuildPackageSequences(currentPackage Package, basePackages []Package) []Pac
 
 // TerraformCommand stores system wide configuration
 type TerraformCommand struct {
-	Configs   []string
-	Scripts   string
-	StateFile string
+	Configs    []string
+	Scripts    string
+	StateFile  string
+	OutputFile string
 }
 
 // contains packages in sequence

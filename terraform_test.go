@@ -10,28 +10,6 @@ import (
 	. "github.com/smartystreets/assertions"
 )
 
-// func TestPlan(t *testing.T) {
-// 	state := BuildTerraState("./resources/sample")
-// 	args := []string{"api", "dev", "eu-west-1"}
-// 	commands, _ := BuildCommands(state.Package, args)
-// 	command := From(commands).Last().(TerraformCommand)
-// 	TerraformGet(command)
-// }
-
-// func TestGet(t *testing.T) {
-// 	state := BuildTerraState("./resources/sample")
-// 	args := []string{"api", "dev", "eu-west-1"}
-// 	commands, _ := BuildCommands(state.Package, args)
-// 	command := From(commands).Last().(TerraformCommand)
-// 	f, _ := os.Create("")
-
-// 	TerraformGet(command, f)
-// 	if ok, message := So(len(slurp), ShouldBeGreaterThan, 1000); !ok {
-// 		t.Error(message)
-// 	}
-
-// }
-
 func TestTerraformExec(t *testing.T) {
 	pr, pw := io.Pipe()
 	defer pr.Close()
