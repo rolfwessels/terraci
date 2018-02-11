@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit,Input,OnChanges } from '@angular/core';
 import { Package } from '../../@core/data/api.service';
 
 @Component({
@@ -7,7 +7,7 @@ import { Package } from '../../@core/data/api.service';
   styleUrls: ['./package.component.scss']
 })
 
-export class PackageComponent implements OnInit {
+export class PackageComponent implements OnInit,OnChanges {
   @Input() package: Package;
   packagesWithStates: Package[];
   packagesWithSettings: Package[];
@@ -16,11 +16,17 @@ export class PackageComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.package);
+    this.buildPackages();
+  }
+
+  ngOnChanges(changes) {
+    this.buildPackages();
+  }
+
+  buildPackages() {
     if (this.package != null && this.package.packages) {
       this.packagesWithStates = this.package.packages.filter((p) => p.tfFiles );
-      this.packagesWithSettings = this.package.packages.filter((p) => p.tfVars );
-      this.packagesOther = this.package.packages.filter((p) => !p.tfFiles && !p.tfVars );
+      this.packagesOther = this.package.packages.filter((p) => !p.tfFiles );
     }
   }
 

@@ -1,23 +1,35 @@
-<span>
-    <h2>{{package.name}}</h2>
-    <!-- <div class="dropdown btn-group" ngbDropdown>
-            <button type="button" class="btn btn-primary">Dropdown</button>
-            <button type="button" class="btn btn-primary" ngbDropdownToggle></button>
-            <ul class="dropdown-menu" ngbDropdownMenu>
-              <li class="dropdown-item">Icon Button</li>
-              <li class="dropdown-item">Hero Button</li>
-              <li class="dropdown-item">Default</li>
-            </ul>
-        </div> -->
-    <div class="row" *ngIf="packagesWithStates">
-      <div class="col-3" *ngFor="let package1 of packagesWithStates">
-        <nb-card  >
-            <nb-card-header>{{package1.name}}</nb-card-header>
-            <nb-card-body>
-              Boom</nb-card-body>
-        </nb-card>
+<span *ngIf="package !== null">
+  <div class="row">
+    <div class="col mb-4 ">
+      <h2 class="float-left">{{package.name}}</h2>
+      <div class="float-left ml-3" *ngIf="package.tfVars?.length > 1">
+        <div class="dropdown btn-group" ngbDropdown>
+          <button type="button" class="btn btn-primary">{{package.tfVars[0]}}</button>
+          <button type="button" class="btn btn-primary" ngbDropdownToggle></button>
+          <ul class="dropdown-menu" ngbDropdownMenu>
+            <li class="dropdown-item" *ngFor="let option of package.tfVars">{{option}}</li>
+
+          </ul>
+        </div>
       </div>
     </div>
-    <app-package-list [packages]="packagesWithSettings"></app-package-list>
-    <app-package-list [packages]="packagesOther"></app-package-list>
+
+  </div>
+
+  <div class="row" *ngIf="packagesWithStates">
+    <div class="col-13 col-md-3" *ngFor="let package1 of packagesWithStates">
+      <nb-card>
+        <nb-card-header>{{package1.name}}</nb-card-header>
+        <nb-card-body>
+          Boom</nb-card-body>
+      </nb-card>
+    </div>
+  </div>
+
+  <div *ngIf="packagesOther">
+
+    <app-package *ngFor="let package of packagesOther" [package]="package"></app-package>
+  </div>
+
+
 </span>

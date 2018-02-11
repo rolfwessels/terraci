@@ -3,7 +3,7 @@
   <div  *ngIf="loading">
       loading....
   </div>
-  <div  *ngIf="(currentState$|async)?.package">
+  <div  >
       <app-package [package]="(currentState$|async)?.package" ></app-package>
   </div>
 </div>
