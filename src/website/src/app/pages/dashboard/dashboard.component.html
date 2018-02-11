@@ -1,5 +1,9 @@
-<div class="row">
-  <nb-card>
-    <nb-card-body>Hello from ngx-admin sandbox project.</nb-card-body>
-  </nb-card>
+<div  >
+
+  <div  *ngIf="loading">
+      loading....
+  </div>
+  <div  *ngIf="(currentState$|async)?.package">
+      <app-package [package]="(currentState$|async)?.package" ></app-package>
+  </div>
 </div>
