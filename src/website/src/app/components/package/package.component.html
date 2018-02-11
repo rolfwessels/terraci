@@ -4,10 +4,10 @@
       <h2 class="float-left">{{package.name}}</h2>
       <div class="float-left ml-3" *ngIf="package.tfVars?.length > 1">
         <div class="dropdown btn-group" ngbDropdown>
-          <button type="button" class="btn btn-primary">{{package.tfVars[0]}}</button>
+          <button type="button" class="btn btn-primary">{{package.tfVars[0].replace('.tfvars','')}}</button>
           <button type="button" class="btn btn-primary" ngbDropdownToggle></button>
           <ul class="dropdown-menu" ngbDropdownMenu>
-            <li class="dropdown-item" *ngFor="let option of package.tfVars">{{option}}</li>
+            <li class="dropdown-item" *ngFor="let option of package.tfVars">{{option.replace('.tfvars','')}}</li>
 
           </ul>
         </div>
@@ -27,7 +27,6 @@
   </div>
 
   <div *ngIf="packagesOther">
-
     <app-package *ngFor="let package of packagesOther" [package]="package"></app-package>
   </div>
 
