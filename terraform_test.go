@@ -121,5 +121,4 @@ func TestBuildPackageSequencesShouldContainParents(t *testing.T) {
 	} else {
 		t.Error("could not cast sample")
 	}
-
 }

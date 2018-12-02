@@ -28,14 +28,31 @@ export interface Package {
   name: string;
   path: string;
   tfVars: string[];
+  configOptions: string[];
   tfFiles: string[];
   packages: Package[];
+  states : string[];
 }
 
 export interface CurrentState {
   path: string;
   package: Package;
 }
+
+export interface PackageState {
+  path: string;
+  package: Package;
+}
+
+export interface  PackageState  {
+	state : number;
+	additions : number;
+	changes : number;
+	destroys : number;
+	lastUpdated : number;
+	logContents : string[] ;
+}
+
 
 
 
