@@ -1,4 +1,4 @@
 locals {
-  key_other = "ifs-${var.name}-${var.aws_region}"
-  key_eu = "ifs-${var.name}"
+  key_other = "${var.name}-${var.aws_region}"
+  key_eu    = "${var.name}"
 }

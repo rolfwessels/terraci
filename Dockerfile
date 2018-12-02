@@ -5,11 +5,12 @@ RUN apk update
 RUN apk upgrade
 RUN apk add ca-certificates wget && update-ca-certificates
 RUN apk add --no-cache --update \
-    curl \
-    git \
-    zip \
-    ncurses \
-    busybox
+  curl \
+  git \
+  zip \
+  ncurses \
+  busybox \
+  make
 
 RUN go get github.com/ahmetb/go-linq
 RUN go get github.com/gorilla/handlers
@@ -29,15 +30,10 @@ RUN terraform version
 RUN rm -f terra*
 
 
-RUN apk add --no-cache --update \
-    make
-
 WORKDIR /go/src/github.com/rolfwessels/continues-terraforming
 #COPY ./ ./
 COPY ./readme.md ./
 
 
 #RUN go build main.go terrastate.go cli.go terraform.go
-
-
 CMD ["top"]

@@ -32,7 +32,6 @@ func TestTerraformExec(t *testing.T) {
 
 func TestBuildCommands(t *testing.T) {
 	state := BuildTerraState("./resources/sample")
-	//Dump(state, "state")
 	args := []string{"api", "application", "dev", "eu-west-1"}
 	x, _ := BuildCommands(state.Package, args)
 	if ok, message := So(len(x), ShouldEqual, 2); !ok {

@@ -70,6 +70,7 @@ func BuildCommands(currentPackage Package, keys []string) ([]TerraformCommand, e
 	command := []TerraformCommand{}
 	sec := BuildPackageSequences(currentPackage, []Package{})
 	for _, sec := range sec {
+
 		if contains(keys, sec.Name) {
 			cmd := TerraformCommand{}
 			selectedConfigs := []string{"ts"}
@@ -137,7 +138,7 @@ type TerraformCommand struct {
 	OutputFile string
 }
 
-// contains packages in sequence
+// PackageSequences contains the sequences
 type PackageSequences struct {
 	Name     string
 	Packages []Package
