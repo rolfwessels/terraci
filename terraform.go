@@ -18,13 +18,14 @@ func TerraformInit(w io.Writer) error {
 		// path/to/whatever exists
 		return nil
 	} else {
-		return execCommand("terraform.exe", []string{"init"}, w)
+		return execCommand("terraform", []string{"init"}, w)
 	}
 
 }
 
 func TerraformGet(command TerraformCommand, w io.Writer) error {
-	return execCommand("terraform.exe", []string{"get", command.Scripts}, w)
+
+	return execCommand("terraform", []string{"get", command.Scripts}, w)
 }
 
 func TerraformPlan(command TerraformCommand, w io.Writer) error {
@@ -40,7 +41,7 @@ func TerraformPlan(command TerraformCommand, w io.Writer) error {
 	outFile := "-out=" + command.OutputFile
 	args = append(args, []string{stateFile, outFile, "-no-color", "-input=false", command.Scripts}...)
 
-	return execCommand("terraform.exe", args, w)
+	return execCommand("terraform", args, w)
 }
 
 func TerraformApply(command TerraformCommand, w io.Writer) error {
@@ -48,7 +49,7 @@ func TerraformApply(command TerraformCommand, w io.Writer) error {
 
 	args = append(args, []string{"-no-color", "-input=false", command.OutputFile}...)
 
-	return execCommand("terraform.exe", args, w)
+	return execCommand("terraform", args, w)
 }
 
 func execCommand(executable string, args []string, w io.Writer) error {

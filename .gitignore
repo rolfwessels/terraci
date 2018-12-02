@@ -4,3 +4,4 @@ debug.test
 **/*.tfstate
 **/*.tfout
 src/React_Full_Project/
+**/continues-terraforming

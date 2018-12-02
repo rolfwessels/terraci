@@ -28,6 +28,10 @@ RUN mv terraform /usr/local/bin/
 RUN terraform version
 RUN rm -f terra*
 
+
+RUN apk add --no-cache --update \
+    make
+
 WORKDIR /go/src/github.com/rolfwessels/continues-terraforming
 #COPY ./ ./
 COPY ./readme.md ./

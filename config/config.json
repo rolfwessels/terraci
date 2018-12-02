@@ -2,5 +2,5 @@
   "Port": 8000,
   "BaseTerraformFolder": "./resources/sample",
   "Logfile": "/var/log/continues-terraforming.log",
-  "Terraform": "C:/ProgramData/chocolatey/bin/terraform.exe"
+  "Terraform": "terraform"
 }

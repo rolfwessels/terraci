@@ -16,21 +16,29 @@ aws_region=eu-west-1
 
 ## For developers
 
+### Start the dev container
+
+`make up`
+
 ### Building
 
-Run the command `./build.com` to build the main.exe
+Run the command `make build` to build the main.exe
 
 ### Run
 
 To run the examples. You call
 
-- `./main plan eu-west-1 dev global`
-- `./main plan eu-west-1 dev region/env/setup`
+- `go build; ./continues-terraforming plan eu-west-1 dev global`
+  or once built
+- `./continues-terraforming plan eu-west-1 dev global`
+- `./continues-terraforming plan eu-west-1 dev setup`
 
-Or you can build and plan using
+  Or you can build and plan using
+  TerraformCommand
 
-- `./run plan eu-west-1 dev global`
+- `make run arg="plan eu-west-1 dev global"`
 
 # Resources
 
+- https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly # for windows users
 - https://blog.gruntwork.io/how-to-create-reusable-infrastructure-with-terraform-modules-25526d65f73d

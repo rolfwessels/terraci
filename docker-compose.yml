@@ -8,6 +8,7 @@ services:
     deploy:
     restart: unless-stopped
     volumes:
+      - "./.aws:/root/.aws"
       - "./:/go/src/github.com/rolfwessels/continues-terraforming"
     environment:
       - nothing=nothing
