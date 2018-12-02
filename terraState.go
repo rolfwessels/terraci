@@ -20,6 +20,7 @@ func BuildTerraState(folder string) TerraState {
 		Path:    folder,
 		Package: BuildFromFolder(path.Dir(folder), file, []string{}),
 	}
+
 	return terraState
 }
 
@@ -132,10 +133,8 @@ func ReadCurrentStates(basePath string, configs []string) map[string]PackageStat
 		_, err := os.Stat(fullPath)
 
 		if err == nil {
-
-			// gonfig.GetConf(fullPath, &cstate)
-			Dump(cstate, "File read")
-			//log.Fatal(err)
+			//gonfig.GetConf(fullPath, &cstate)
+			//Dump(cstate, "File read")
 		}
 
 	}

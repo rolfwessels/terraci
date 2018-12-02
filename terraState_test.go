@@ -96,7 +96,7 @@ func TestBuildFromFolderGivenNoOptionsConfigOptions(t *testing.T) {
 		log.Fatal(err)
 	}
 	value := BuildFromFolder("./resources/sample/", file, []string{})
-	Dump(value, "value")
+
 	t.Log("Package with no params should always have a global state")
 	if ok, message := So(len(value.States), ShouldEqual, 1); !ok {
 		t.Error(message)

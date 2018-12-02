@@ -1,2 +1,2 @@
 call build
-main.exe serve
+main.exe %*
