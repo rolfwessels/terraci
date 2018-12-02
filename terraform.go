@@ -93,7 +93,7 @@ func BuildCommands(currentPackage Package, keys []string) ([]TerraformCommand, e
 						err := fmt.Sprintf("When applying terraform changes to %s you need to select only one config [%s].", sec.Name, strings.Join(joinops, ", "))
 						return command, errors.New(err)
 					}
-					selectedConfigs = append(selectedConfigs, strings.Replace(filterdCnfs[0], ".tfvars", "", 1))
+					selectedConfigs = append(selectedConfigs, strings.Replace(filterdCnfs[0], FileTfVariables, "", 1))
 					cnfs = filterdCnfs
 				}
 				for _, confs := range cnfs {
