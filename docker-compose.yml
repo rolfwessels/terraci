@@ -1,0 +1,17 @@
+version: "3"
+networks:
+  dev-network:
+
+services:
+  dev:
+    build: ./
+    deploy:
+    restart: unless-stopped
+    volumes:
+      - "./:/go/src/github.com/rolfwessels/continues-terraforming"
+    environment:
+      - nothing=nothing
+    ports:
+      - 8000:8000
+    networks:
+      - dev-network

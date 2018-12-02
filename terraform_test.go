@@ -17,7 +17,7 @@ func TestTerraformExec(t *testing.T) {
 	go func() {
 		// close the writer, so the reader knows there's no more data
 		defer pw.Close()
-		err = execCommand("terraform.exe", []string{"help"}, pw)
+		err = execCommand("terraform", []string{"help"}, pw)
 	}()
 
 	slurp, _ := ioutil.ReadAll(pr)
