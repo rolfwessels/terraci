@@ -18,6 +18,7 @@ aws_region=eu-west-1
 
 ### Start the dev container
 
+Note: windows users will need to link their .aws folder `ln -s /c/Users/User-pc/.aws ~/.aws`
 `make up`
 
 ### Building
@@ -33,8 +34,8 @@ To run the examples. You call
 - `./continues-terraforming plan eu-west-1 dev global`
 - `./continues-terraforming plan eu-west-1 dev setup`
 
-  Or you can build and plan using
-  TerraformCommand
+Or you can build and plan using
+TerraformCommand
 
 - `make run arg="plan eu-west-1 dev global"`
 

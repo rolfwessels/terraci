@@ -5,3 +5,4 @@ debug.test
 **/*.tfout
 src/React_Full_Project/
 **/continues-terraforming
+.aws/*

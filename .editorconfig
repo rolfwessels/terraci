@@ -7,3 +7,6 @@ indent_size = 2
 end_of_line = lf
 
 
+[{Makefile,**.mk}]
+# Use tabs for indentation (Makefiles require tabs)
+indent_style = tab
